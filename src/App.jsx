@@ -1,43 +1,41 @@
-import React, { useState, useEffect } from "react";
-import TransactionForm from "./components/TransactionForm";
-import TransactionList from "./components/TransactionList";
-import EditModal from "./components/EditModal";
+import { useState, useEffect } from "react";
+import TransactionForm from "./assets/TransactionForm/TransactionForm";
+import TransactionList from "./assets/TransactionList/TransactionList";
+import EditModal from "./assets/EditModal/EditModal";
 import "./App.css";
 
 function App() {
   const [transactions, setTransactions] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentEdit, setCurrentEdit] = useState(null);
+  const [editingTransaction, setEditingTransaction] = useState(null);
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("transactions")) || [];
-    setTransactions(stored);
+    const storedTransactions = JSON.parse(localStorage.getItem("transactions")) || [];
+    setTransactions(storedTransactions);
   }, []);
 
   useEffect(() => {
     localStorage.setItem("transactions", JSON.stringify(transactions));
   }, [transactions]);
 
-  const addTransaction = (description, amount) => {
-    const newTx = { id: Date.now(), description, amount: parseFloat(amount) };
-    setTransactions([...transactions, newTx]);
+  const addTransaction = (transaction) => {
+    setTransactions([...transactions, { ...transaction, id: Date.now() }]);
   };
 
   const deleteTransaction = (id) => {
     setTransactions(transactions.filter((tx) => tx.id !== id));
   };
 
-  const openEdit = (tx) => {
-    setCurrentEdit(tx);
-    setIsModalOpen(true);
+  const startEditing = (transaction) => {
+    setEditingTransaction(transaction);
   };
 
-  const saveEdit = (id, description, amount) => {
-    const updated = transactions.map((tx) =>
-      tx.id === id ? { ...tx, description, amount: parseFloat(amount) } : tx
-    );
-    setTransactions(updated);
-    setIsModalOpen(false);
+  const saveEditedTransaction = (editedTransaction) => {
+    setTransactions(transactions.map((tx) => (tx.id === editedTransaction.id ? editedTransaction : tx)));
+    setEditingTransaction(null);
+  };
+
+  const cancelEditing = () => {
+    setEditingTransaction(null);
   };
 
   const balance = transactions.reduce((sum, tx) => sum + tx.amount, 0);
@@ -49,18 +47,18 @@ function App() {
         <h3>Saldo</h3>
         <p id="balance">{balance.toFixed(2)} €</p>
       </div>
-      <TransactionForm onAdd={addTransaction} />
+      <TransactionForm onAddTransaction={addTransaction} />
       <h3>Transactions</h3>
       <TransactionList
         transactions={transactions}
         onDelete={deleteTransaction}
-        onEdit={openEdit}
+        onEdit={startEditing}
       />
-      {isModalOpen && (
+      {editingTransaction && (
         <EditModal
-          transaction={currentEdit}
-          onSave={saveEdit}
-          onClose={() => setIsModalOpen(false)}
+          transaction={editingTransaction}
+          onSave={saveEditedTransaction}
+          onCancel={cancelEditing}
         />
       )}
     </div>

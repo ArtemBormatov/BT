@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import "./EditModal.css";
 
-function EditModal({ transaction, onSave, onClose }) {
+function EditModal({ transaction, onSave, onCancel }) {
   const [description, setDescription] = useState(transaction.description);
   const [amount, setAmount] = useState(transaction.amount);
 
   const handleSave = () => {
-    if (!description || isNaN(amount)) {
-      alert("Please enter valid data.");
+    const amt = parseFloat(amount);
+    if (!description.trim() || isNaN(amt)) {
+      alert("Please enter valid description and amount.");
       return;
     }
-    onSave(transaction.id, description, amount);
+    onSave({ ...transaction, description, amount: amt });
   };
 
   return (
@@ -29,7 +31,7 @@ function EditModal({ transaction, onSave, onClose }) {
         />
         <div className="modal-buttons">
           <button onClick={handleSave}>Save</button>
-          <button onClick={onClose}>Cancel</button>
+          <button onClick={onCancel}>Cancel</button>
         </div>
       </div>
     </div>
