@@ -4,6 +4,7 @@ import "./TransactionForm.css";
 function TransactionForm({ onAddTransaction }) {
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
+  const [category, setCategory] = useState("Food");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,9 +13,10 @@ function TransactionForm({ onAddTransaction }) {
       alert("Please enter a valid description and amount.");
       return;
     }
-    onAddTransaction({ description, amount: amt });
+    onAddTransaction({ description, amount: amt, category });
     setDescription("");
     setAmount("");
+    setCategory("Food");
   };
 
   return (
@@ -27,7 +29,8 @@ function TransactionForm({ onAddTransaction }) {
         onChange={(e) => setDescription(e.target.value)}
         placeholder="Example: S-market"
       />
-      <label htmlFor="amount">Sum:</label>
+
+      <label htmlFor="amount">Amount:</label>
       <input
         type="number"
         id="amount"
@@ -35,7 +38,22 @@ function TransactionForm({ onAddTransaction }) {
         onChange={(e) => setAmount(e.target.value)}
         placeholder="Example: -50 or +100"
       />
-      <button type="submit">Add Transaction</button>
+
+      <label htmlFor="category">Category:</label>
+      <select
+        id="category"
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+      >
+        <option value="Food">Food</option>
+        <option value="Transport">Transport</option>
+        <option value="Shopping">Shopping</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Bills">Bills</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <button type="submit" className="filter-button">Add Transaction</button>
     </form>
   );
 }

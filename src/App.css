@@ -10,20 +10,22 @@ body {
     align-items: center; /* Center vertically */
   }
   
-  /* The container styles */
+  /* The container styles (100% height) */
   .container {
     background-color: #fff;
     padding: 30px;
     border-radius: 12px;
     width: 800px;
-    height: 900px;
+    height: 100vh; /* Full viewport height */
     overflow-y: auto;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column; /* Stack elements vertically */
     gap: 20px;
+    justify-content: flex-start; /* Align content from the top */
   }
   
+  /* Title header styles */
   h1 {
     font-size: 36px;
     margin-bottom: 20px;
@@ -31,6 +33,7 @@ body {
     color: #4a90e2;
   }
   
+  /* Balance box styles */
   .balance-box {
     background-color: #4a90e2;
     color: #fff;
@@ -51,6 +54,7 @@ body {
     margin-top: 10px;
   }
   
+  /* Form styling */
   .form {
     display: flex;
     flex-direction: column;
@@ -85,13 +89,95 @@ body {
     background-color: #357abd;
   }
   
+  /* Transaction list styles */
   #transaction-list {
     list-style: none;
     padding: 0;
-    max-height: 400px;
+    max-height: calc(100vh - 200px); /* Calculate height based on total height */
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-top: 20px;
+  }
+  
+  /* Transaction row container */
+  .transaction-item {
+    display: flex;
+    justify-content: space-between; /* Space elements across the row */
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+  }
+  
+  /* Description container */
+  .transaction-item-description {
+    flex: 3; /* Description takes more space */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align to the left */
+  }
+  
+  .transaction-item-description span {
+    font-size: 18px;
+  }
+  
+  /* Category container */
+  .transaction-item-category {
+    flex: 2; /* Category gets less width */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align to the left */
+  }
+  
+  .transaction-item-category span {
+    font-size: 18px; /* Ensure category font size matches others */
+    margin-left: 10px; /* Small margin to the left for separation */
+  }
+  
+  /* Amount container */
+  .transaction-item-amount {
+    flex: 2;  /* Amount gets equal width */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .transaction-item-amount span {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  /* Buttons container */
+  .transaction-item-buttons {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 10px; /* A bit of space between buttons and last element */
+  }
+  
+  /* Button styles */
+  .icon-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+  }
+  
+  .icon {
+    width: 20px;  /* Adjust icon size if needed */
+    height: 20px;
+  }
+  
+  /* Space between buttons */
+  .icon-button:first-child {
+    margin-right: 2px;
   }
   

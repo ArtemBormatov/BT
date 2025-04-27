@@ -10,6 +10,11 @@ function TransactionItem({ transaction, onDelete, onEdit }) {
         <span>{transaction.description}</span>
       </div>
 
+      {/* Category Container */}
+      <div className="transaction-item-category">
+        <span>{transaction.category}</span>
+      </div>
+
       {/* Amount Container */}
       <div className="transaction-item-amount">
         <span>{transaction.amount.toFixed(2)} €</span>

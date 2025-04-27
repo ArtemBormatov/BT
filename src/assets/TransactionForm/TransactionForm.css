@@ -10,6 +10,22 @@
     font-size: 1.2rem;
   }
   
+  select {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}  
+  /* Make the select input match text input size */
+.full-width-select {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 100%;
+  }
+  
+  
   .transaction-form button {
     padding: 10px;
     background-color: #007bff;
@@ -23,4 +39,20 @@
   .transaction-form button:hover {
     background-color: #0056b3;
   }
+
+  .cancel-button {
+    background-color: #ccc;
+    color: black;
+    padding: 14px;
+    font-size: 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.cancel-button:hover {
+    background-color: #aaa;
+}
+
   
