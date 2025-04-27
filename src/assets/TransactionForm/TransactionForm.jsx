@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./TransactionForm.css";
 
 function TransactionForm({ onAddTransaction }) {
@@ -13,7 +13,16 @@ function TransactionForm({ onAddTransaction }) {
       alert("Please enter a valid description and amount.");
       return;
     }
-    onAddTransaction({ description, amount: amt, category });
+
+    // ✅ Pass the date as part of the new transaction object
+    onAddTransaction({
+      description,
+      amount: amt,
+      category,
+      date: new Date().toISOString(), // <-- Date is here, inside the object
+    });
+
+    // Clear the form
     setDescription("");
     setAmount("");
     setCategory("Food");
@@ -23,20 +32,18 @@ function TransactionForm({ onAddTransaction }) {
     <form className="transaction-form" onSubmit={handleSubmit}>
       <label htmlFor="description">Description:</label>
       <input
-        type="text"
         id="description"
+        type="text"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        placeholder="Example: S-market"
       />
 
       <label htmlFor="amount">Amount:</label>
       <input
-        type="number"
         id="amount"
+        type="number"
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
-        placeholder="Example: -50 or +100"
       />
 
       <label htmlFor="category">Category:</label>
@@ -46,14 +53,15 @@ function TransactionForm({ onAddTransaction }) {
         onChange={(e) => setCategory(e.target.value)}
       >
         <option value="Food">Food</option>
+        <option value="Salary">Salary</option>
         <option value="Transport">Transport</option>
-        <option value="Shopping">Shopping</option>
         <option value="Entertainment">Entertainment</option>
-        <option value="Bills">Bills</option>
         <option value="Other">Other</option>
+        <option value="Shopping">Shopping</option> {/* New category */}
+        <option value="Bills">Bills</option>       {/* New category */}
       </select>
 
-      <button type="submit" className="filter-button">Add Transaction</button>
+      <button type="submit">Add Transaction</button>
     </form>
   );
 }
