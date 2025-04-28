@@ -1,83 +1,87 @@
+/* Ensure body takes full height and uses flexbox to center the container */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
-    color: #333;
     margin: 0;
     padding: 0;
+    height: 100vh; /* Full height of the viewport */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
   }
   
+  /* The container styles (100% height) */
   .container {
     background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    height: 800px;
-    width: 600px; /* slightly bigger to improve space */
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border-radius: 12px;
+    width: 800px;
+    height: 100vh; /* Full viewport height */
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; /* Stack elements vertically */
+    gap: 20px;
+    justify-content: flex-start; /* Align content from the top */
   }
   
+  /* Title header styles */
   h1 {
+    font-size: 36px;
     margin-bottom: 20px;
-    font-size: 24px;
+    text-align: center;
     color: #4a90e2;
   }
   
+  /* Balance box styles */
   .balance-box {
     background-color: #4a90e2;
     color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    width: 100%;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    text-align: center;
   }
   
   .balance-box h3 {
+    font-size: 24px;
     margin: 0;
-    font-size: 18px;
   }
   
   #balance {
-    font-size: 24px;
+    font-size: 32px;
     font-weight: bold;
-    margin: 10px 0;
+    margin-top: 10px;
   }
   
-  form {
+  /* Form styling */
+  .form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
-    width: 100%;
+    gap: 15px;
+    margin-bottom: 30px;
   }
   
   label {
+    font-size: 18px;
     font-weight: bold;
-    text-align: left;
   }
   
   input[type="text"],
   input[type="number"] {
-    padding: 10px;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 6px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    width: 100%;
   }
   
   button[type="submit"] {
-    padding: 10px;
     background-color: #4a90e2;
-    color: #fff;
+    color: white;
+    padding: 14px;
+    font-size: 18px;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: 6px;
     cursor: pointer;
   }
   
@@ -85,100 +89,95 @@ body {
     background-color: #357abd;
   }
   
+  /* Transaction list styles */
   #transaction-list {
     list-style: none;
     padding: 0;
-    margin: 0;
-    width: 100%;
-  }
-  
-  #transaction-list li {
-    background-color: #f9f9f9;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  #transaction-list li.income {
-    border-left: 5px solid #2ecc71;
-  }
-  
-  #transaction-list li.expense {
-    border-left: 5px solid #e74c3c;
-  }
-  
-  /* Icon Button Styles */
-  .icon-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0 2px;
-    margin-left: 4px;
-    display: inline-flex;
-    align-items: center;
-  }
-  
-  .icon-button .icon {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .icon-button:hover .icon {
-    opacity: 0.7;
-  }
-  
-  /* Modal Styles */
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .modal-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    width: 300px;
+    max-height: calc(100vh - 200px); /* Calculate height based on total height */
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
   }
   
-  .modal-content input {
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .modal-buttons {
+  /* Transaction row container */
+  .transaction-item {
     display: flex;
-    justify-content: flex-end;
-    gap: 8px;
+    justify-content: space-between; /* Space elements across the row */
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
   }
   
-  .modal-buttons button {
-    padding: 8px 12px;
-    font-size: 14px;
+  /* Description container */
+  .transaction-item-description {
+    flex: 3; /* Description takes more space */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align to the left */
+  }
+  
+  .transaction-item-description span {
+    font-size: 18px;
+  }
+  
+  /* Category container */
+  .transaction-item-category {
+    flex: 2; /* Category gets less width */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align to the left */
+  }
+  
+  .transaction-item-category span {
+    font-size: 18px; /* Ensure category font size matches others */
+    margin-left: 10px; /* Small margin to the left for separation */
+  }
+  
+  /* Amount container */
+  .transaction-item-amount {
+    flex: 2;  /* Amount gets equal width */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .transaction-item-amount span {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  /* Buttons container */
+  .transaction-item-buttons {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 10px; /* A bit of space between buttons and last element */
+  }
+  
+  /* Button styles */
+  .icon-button {
+    background: none;
     border: none;
-    border-radius: 5px;
-    background-color: #4a90e2;
-    color: #fff;
+    padding: 0;
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
   }
   
-  .modal-buttons button:hover {
-    background-color: #357abd;
+  .icon {
+    width: 20px;  /* Adjust icon size if needed */
+    height: 20px;
   }
+  
+  /* Space between buttons */
+  .icon-button:first-child {
+    margin-right: 2px;
+  }
+  
