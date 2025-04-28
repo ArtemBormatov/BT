@@ -1,53 +1,58 @@
 /* Transaction row container */
 .transaction-item {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start; /* Align all items to the left */
     align-items: center;
     margin-bottom: 15px;
     padding: 10px;
     background-color: #f9f9f9;
     border-radius: 6px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 75%; /* Adjust the width here */
-    max-width: 780px; /* You can also set a max-width if needed */
+    width: 100%; /* Full width */
+    max-width: 780px; /* Max width */
 }
-  
+
 /* Description container */
 .transaction-item-description {
     flex-grow: 1; /* Allow description to take available space */
-    margin-right: 20px;
-}
-  
-.transaction-item-description span {
-    font-size: 22px; /* enlarged from 18px */
-}
-  
-/* Amount container */
-.transaction-item-amount {
-    margin-right: 300px; /* Keep same */
+    margin-right: 10px; /* Small space between description and category */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Prevent text wrapping */
+    margin-left: 50px
 }
 
+/* Category container */
 .transaction-item-category {
-    font-size: 18px; /* Match other text */
-    margin-right: 100px; /* Add space between category and price */
+    font-size: 18px;
     font-weight: bold;
     color: #555;
-    display: flex;
-    align-items: center;
+    margin-right: 10px; /* Small space between category and amount */
+    flex-shrink: 0; /* Prevent shrinking */
+    white-space: nowrap; /* Prevent wrapping */
 }
 
-  
-.transaction-item-amount span {
-    font-size: 22px; /* enlarged from 18px */
+/* Amount container */
+.transaction-item-amount {
+    font-size: 22px;
     font-weight: bold;
+    margin-right: 20px; /* Space between amount and buttons */
+    flex-shrink: 0; /* Prevent shrinking */
+    text-align: right; /* Right-align the amount */
 }
-  
+
+/* Date container */
+.transaction-item-date {
+    flex: 0 1 120px; /* Allow date to have fixed size */
+    text-align: center;
+}
+
 /* Buttons container */
 .transaction-item-buttons {
     display: inline-flex;
     align-items: center;
 }
-  
+
 /* Button styles */
 .icon-button {
     background: none;
@@ -59,12 +64,12 @@
     justify-content: center;
     margin: 0;
 }
-  
+
 .icon {
-    width: 24px;  /* slightly enlarged from 20px */
+    width: 24px;
     height: 24px;
 }
-  
+
 /* Space between buttons */
 .icon-button:first-child {
     margin-right: 2px;

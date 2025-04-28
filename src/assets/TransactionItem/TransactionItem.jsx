@@ -3,8 +3,21 @@ import editIcon from "../Icons/edit.svg";
 import deleteIcon from "../Icons/delete.svg";
 
 function TransactionItem({ transaction, onDelete, onEdit }) {
+  const formattedDate = transaction.date
+    ? new Date(transaction.date).toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      })
+    : "No date";
+
   return (
     <li className={`transaction-item ${transaction.amount > 0 ? "income" : "expense"}`}>
+      {/* Date Container */}
+      <div className="transaction-item-date">
+        <span>{formattedDate}</span>
+      </div>
+
       {/* Description Container */}
       <div className="transaction-item-description">
         <span>{transaction.description}</span>
@@ -34,3 +47,4 @@ function TransactionItem({ transaction, onDelete, onEdit }) {
 }
 
 export default TransactionItem;
+
